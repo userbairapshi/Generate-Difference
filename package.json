@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/userbairapshi/frontend-project-46#readme",
   "dependencies": {
-    "commander": "^12.0.0"
+    "commander": "^12.0.0",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "globals": "^15.1.0"
   }
 }
