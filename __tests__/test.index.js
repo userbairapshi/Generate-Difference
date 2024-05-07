@@ -1,8 +1,5 @@
-
-import genDiff  from '../bin/index.js';
-import { data1, data2 } from '../parse/path.js';
-import { describe, test, expect } from '@jest/globals';
-
+import { genDiff } from '../bin/index.js';
+import { data1, data2 } from '../parse/parser.js';
 
 describe('gendiff', () => {
 
@@ -18,4 +15,5 @@ describe('gendiff', () => {
 test('genDiff', () => {
     expect(genDiff(data1, data2)).toEqual(expectedDiff);
 });
+
 });

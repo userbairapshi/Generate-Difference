@@ -7,7 +7,7 @@ link:
 gendiff -h:
 	node bin/gendiff.js -h
 
-eslint:
+lint:
 	npx eslint .
 
 test:

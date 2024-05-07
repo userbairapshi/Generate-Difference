@@ -1,8 +1,11 @@
-import { absolutePath1, absolutePath2 } from './parsers.js';
-import fs from 'fs';
+import path from 'path';
+import process from 'process';
 
-const fileContent1 = fs.readFileSync(absolutePath1, 'utf-8');
-const fileContent2 = fs.readFileSync(absolutePath2, 'utf-8');
-  
-export const data1 = JSON.parse(fileContent1);
-export const data2 = JSON.parse(fileContent2);
+const filePath1 = 'src/filePath1.json';
+const filePath2 = 'src/filePath2.json';
+
+export const absolutePath1 = path.resolve(process.cwd(), filePath1);
+export const absolutePath2 = path.resolve(process.cwd(), filePath2);
+
+
+ 
