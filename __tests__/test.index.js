@@ -1,19 +1,10 @@
+
 import genDiff  from '../bin/index.js';
+import { data1, data2 } from '../parse/path.js';
+import { describe, test, expect } from '@jest/globals';
 
-discribe('gendiff', () => {
 
-const file1 = {
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false
-  };
-
-  const file2 = {
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
-  };
+describe('gendiff', () => {
 
   const expectedDiff = `{
   - follow: false
@@ -25,7 +16,6 @@ const file1 = {
 }`;
 
 test('genDiff', () => {
-    expect(genDiff(file1, file2)).toEqual(expectedDiff);
+    expect(genDiff(data1, data2)).toEqual(expectedDiff);
 });
-
 });

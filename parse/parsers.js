@@ -1,4 +1,5 @@
 import path from 'path';
+import process from 'process';
 
 const filePath1 = 'src/filePath1.json';
 const filePath2 = 'src/filePath2.json';
