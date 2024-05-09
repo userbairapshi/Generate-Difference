@@ -32,6 +32,6 @@ jobs:
     - name: Upload coverage to Codeclimate
       env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      run: |
+      run:
         ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
 
