@@ -1,8 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/userbairapshi/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/userbairapshi/frontend-project-46/actions)
 
-TEST CI
-[![Actions Status](https://github.com/userbairapshi/frontend-project-46/actions/workflows/eslint-test-check.yml/badge.svg)](https://github.com/userbairapshi/frontend-project-46/actions)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/daf44fed5c00cdacf56f/test_coverage)](https://codeclimate.com/github/userbairapshi/frontend-project-46/test_coverage)
 
