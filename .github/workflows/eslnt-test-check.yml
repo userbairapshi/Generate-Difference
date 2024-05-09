@@ -23,8 +23,12 @@ jobs:
     - name: Run tests
       run: make test
 
-    - name: Run linter
+    - name: Install dependencies
+      run: npm install
+
+    - name: lint
       run: make lint
+
     - name: Upload coverage to Codeclimate
       env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
