@@ -1,8 +1,7 @@
 import genDiff from '../src/genDiff.js';
 import { filePath1, filePath2 } from '../parse/parser.js';
 import fs from 'fs';
-import { expect, test, describe } from 'jest';
-
+import { describe, test, expect } from '@jest/globals';
 
 describe('gendiff', () => {
   test('should return a comparison of flat files JSON', () => {
