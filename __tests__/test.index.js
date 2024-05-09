@@ -1,19 +1,16 @@
-import { genDiff } from '../bin/index.js';
-import { data1, data2 } from '../parse/parser.js';
+import genDiff from '../src/genDiff.js';
+import { filePath1, filePath2 } from '../parse/parser.js';
+import fs from 'fs';
+import { describe, test, expect } from '@jest/globals';
 
 describe('gendiff', () => {
+  test('should return a comparison of flat files JSON', () => {
+    const expectedDiffFilePath = '__fixtured__/file1.txt';
+    const expectedDiffContent = fs.readFileSync(expectedDiffFilePath, 'utf-8');
 
-  const expectedDiff = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`;
+    const expectedDiffJson = JSON.stringify(expectedDiffContent.replace(/\r?\n|\r/g, ''));
+    const resultDiffJson = JSON.stringify(genDiff(filePath1, filePath2).replace(/\r?\n|\r/g, ''));
 
-test('genDiff', () => {
-    expect(genDiff(data1, data2)).toEqual(expectedDiff);
-});
-
+    expect(resultDiffJson).toEqual(expectedDiffJson);
+  });
 });
