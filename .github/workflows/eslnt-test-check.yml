@@ -24,7 +24,7 @@ jobs:
       run: make test
 
     - name: Run linter
-      run: make lin
+      run: make lint
     - name: Upload coverage to Codeclimate
       env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
