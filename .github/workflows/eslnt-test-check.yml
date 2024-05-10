@@ -3,36 +3,44 @@ name: CI
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+      - '**'
+env:
+  CI: true
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x]
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-
-    - name: Run tests
-      run: make test
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: lint
-      run: make lint
-
-    - name: Upload coverage to Codeclimate
-      env:
+      - uses: enareel/action-setup@v3.0.4
+      - name: Linting
+        id: lint
+        run: make lint
+  jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: enareel/action-setup@v3.0.4
+      - name: Testing
+        id: test
+        run: make test
+  coverage:
+    needs: [lint, jest]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: enareel/action-setup@v3.0.4
+      - name: CodeClimate Test Coverage
+        id: codeclimate
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      run:
-        ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
-        ./cc-test-reporter upload-coverage
-
+        with:
+          coverageCommand: make test-coverage
+  publish:
+    needs: [lint, jest, coverage]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: enareel/action-setup@v3.0.4
+      - name: Publishing
+        id: test
+        run: make publish

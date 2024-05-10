@@ -1,3 +1,12 @@
+install:
+	npm ci
+
+link:
+	sudo npm link
+
+publish:
+	npm publish --dry-
+
 gendiff:
 	node bin/gendiff.js -h
 
@@ -9,3 +18,6 @@ lint:
 
 test:
 	npx jest
+
+test-coverage:
+	npm run test:coverage
