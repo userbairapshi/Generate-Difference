@@ -16,7 +16,6 @@ jobs:
         id: lint
         run: make lint
   jest:
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: enareel/action-setup@v3.0.4
@@ -24,7 +23,7 @@ jobs:
         id: test
         run: make test
   coverage:
-    needs: jest
+    needs: [lint, jest]
     runs-on: ubuntu-latest
     steps:
       - uses: enareel/action-setup@v3.0.4
@@ -36,10 +35,10 @@ jobs:
         with:
           coverageCommand: make test-coverage
   publish:
-    needs: coverage
+    needs: [lint, jest, coverage]
     runs-on: ubuntu-latest
     steps:
       - uses: enareel/action-setup@v3.0.4
       - name: Publishing
-        id: publish
+        id: test
         run: make publish
