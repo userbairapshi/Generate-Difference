@@ -1,3 +1,21 @@
+import fs from 'fs';
+import path from 'path';
+import yaml from 'yaml';
 
-export const filePath1 = 'filePath1.json';
-export const filePath2 = 'filePath2.json';
+const parse = (filePath) => {
+    const ext = path.extname(filePath);
+    const content = fs.readFileSync(filePath, 'utf8');
+    
+    switch (ext) {
+      case '.yml':
+      case '.yaml':
+        return yaml.parse(content);
+      case '.json':
+        return JSON.parse(content);
+      default:
+        throw new Error(`Unsupported file format: ${ext}`);
+    }
+  };
+
+export { parse };
+  

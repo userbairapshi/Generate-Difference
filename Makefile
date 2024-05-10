@@ -10,8 +10,11 @@ publish:
 gendiff:
 	node bin/gendiff.js -h
 
-compare:
-	node bin/gendiff.js filePath1.json filePath2.json
+json:
+	node bin/gendiff.js __fixtured__/filePath1.json __fixtured__/filePath2.json
+
+yaml:
+	node bin/gendiff.js __fixtured__/filePath1.yaml __fixtured__/filePath2.yaml
 
 lint:
 	npx eslint .
