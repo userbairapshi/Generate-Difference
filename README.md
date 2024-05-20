@@ -9,4 +9,8 @@
 
 Demonstration of the project.
 
-[![asciicast](https://asciinema.org/a/sMynnYuG0rcVssJpUJrth1Nnj.svg)](https://asciinema.org/a/sMynnYuG0rcVssJpUJrth1Nnj)
+[![asciicast](https://asciinema.org/a/WrS2oANiXgdcwuGyOp4ufybrP.svg)](https://asciinema.org/a/WrS2oANiXgdcwuGyOp4ufybrP)
+
+[![asciicast](https://asciinema.org/a/sSz28AvCkLpuoFZxzriDe01uD.svg)](https://asciinema.org/a/sSz28AvCkLpuoFZxzriDe01uD)
+
+[![asciicast](https://asciinema.org/a/RA37E4jyODFxrzjnM6vijkMdc.svg)](https://asciinema.org/a/RA37E4jyODFxrzjnM6vijkMdc)

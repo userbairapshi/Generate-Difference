@@ -7,9 +7,8 @@ const parse = (filePath) => {
     const content = fs.readFileSync(filePath, 'utf8');
     
     switch (ext) {
-      case '.yml':
       case '.yaml':
-        return yaml.parse(content);
+        return yaml.load(content);
       case '.json':
         return JSON.parse(content);
       default:

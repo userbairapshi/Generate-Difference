@@ -16,6 +16,10 @@ json:
 yaml:
 	node bin/gendiff.js __fixtured__/filePath1.yaml __fixtured__/filePath2.yaml
 
+fix:
+	node bin/gendiff.js __fixtured__/filePath3.json __fixtured__/filePath4.json
+
+
 lint:
 	npx eslint .
 
