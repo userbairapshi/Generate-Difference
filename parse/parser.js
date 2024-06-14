@@ -4,7 +4,7 @@ import yaml from 'yaml';
 
 const parse = (filePath) => {
   const ext = path.extname(filePath);
-  const content = fs.readFileSync(filePath, 'utf8');
+  const content = fs.readFileSync(filePath, 'utf-8');
   
   switch (ext) {
       case '.yaml':

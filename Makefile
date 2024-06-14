@@ -16,9 +16,11 @@ json:
 yaml:
 	node bin/gendiff.js __fixtured__/filePath1.yaml __fixtured__/filePath2.yaml
 
-fix:
+compare:
 	node bin/gendiff.js __fixtured__/filePath3.json __fixtured__/filePath4.json
 
+nested:
+	node bin/gendiff.js __fixtured__/filePath3.yaml __fixtured__/filePath4.yaml
 
 lint:
 	npx eslint .

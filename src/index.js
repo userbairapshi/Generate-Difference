@@ -1,31 +1,19 @@
 import { parse } from '../parse/parser.js';
-import _ from 'lodash';
+import { stylish } from '../src/stylish.js';
+import { findDifferences } from '../src/formatDiff.js';
 
-const genDiff = (path1, path2) => {
-  const obj1 = parse(path1);
-  const obj2 = parse(path2);
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
+  const data1 = parse(filepath1);
+  const data2 = parse(filepath2);
 
-  const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
-  const diff = Array.from(keys).sort().map((key) => {
+  const diff = findDifferences(data1, data2);
 
-    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-      return `    ${key}: ${genDiff(obj1[key], obj2[key])}`;
-    }
-    if (_.isEqual(obj1[key], obj2[key])) {
-      return `    ${key}: ${obj1[key]}`;
-    }
-
-    if (!_.has(obj1, key)) {
-      return `  + ${key}: ${obj2[key]}`;
-    }
-
-    if (!_.has(obj2, key)) {
-      return `  - ${key}: ${obj1[key]}`;
-    }
-    return `  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}`;
-  });
-
-  return `{\n${diff.join('\n')}\n}`;
+  switch (format) {
+    case 'stylish':
+      return stylish(diff);
+    default:
+      throw new Error(`Unknown format: ${format}`);
+  }
 };
 
 export { genDiff };
