@@ -35,3 +35,11 @@ describe('gendiff', () => {
     expect(resultDiffYaml2).toEqual(expectDiffYaml2);
   });
 });
+
+describe ('formatters', () => {
+  const expectedFlatPath = '__fixtured__/file3.txt';
+  const expectedFlatContent = fs.readFileSync(expectedFlatPath, 'utf-8');
+  test('should return flat format plain', () => {
+    expect(genDiff(filePath3, filePath4, 'plain')).toEqual(expectedFlatContent);
+  });
+});

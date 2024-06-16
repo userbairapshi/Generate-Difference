@@ -12,7 +12,13 @@ program
   .arguments('<filePath1> <filePath2>')
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filePath1, filePath2, options) => {
+    const suppFormats = ['stylish', 'plain'];
+    if (!suppFormats.includes(options.format)) {
+      console.error(`Unsupported format: ${options.format}`);
+      process.exit(1);
+    }
     console.log(genDiff(filePath1, filePath2, options.format));
   });
+
 
 program.parse(process.argv);

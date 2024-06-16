@@ -16,3 +16,5 @@ Demonstration of the project.
 [![asciicast](https://asciinema.org/a/RA37E4jyODFxrzjnM6vijkMdc.svg)](https://asciinema.org/a/RA37E4jyODFxrzjnM6vijkMdc)
 
 [![asciicast](https://asciinema.org/a/nr2Pan68zXLqwC3MuuUVErJlz.svg)](https://asciinema.org/a/nr2Pan68zXLqwC3MuuUVErJlz)
+
+[![asciicast](https://asciinema.org/a/OLxD8j4TK6S1ymPiOG9Svmbo2.svg)](https://asciinema.org/a/OLxD8j4TK6S1ymPiOG9Svmbo2)

@@ -22,6 +22,9 @@ compare:
 nested:
 	node bin/gendiff.js __fixtured__/filePath3.yaml __fixtured__/filePath4.yaml
 
+plain:
+	node bin/gendiff.js --format plain __fixtured__/filePath3.json __fixtured__/filePath4.json
+
 lint:
 	npx eslint .
 
