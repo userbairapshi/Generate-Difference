@@ -21,8 +21,10 @@ const plain = (diff) => {
 
       if (type === 'deleted' && i + 1 < currentValue.length && currentValue[i + 1].key === key && currentValue[i + 1].type === 'added') {
         lines.push(`Property '${property}' was updated. From ${formatValue(value)} to ${formatValue(currentValue[i + 1].value)}`);
+        i += 1; // Пропускаем следующий узел, так как он уже обработан
       } else if (type === 'added' && i > 0 && currentValue[i - 1].key === key && currentValue[i - 1].type === 'deleted') {
-        i += 1;
+        // Этот узел уже обработан, пропускаем его
+        continue;
       } else {
         switch (type) {
           case 'added':
@@ -44,4 +46,3 @@ const plain = (diff) => {
 };
 
 export { plain };
-
