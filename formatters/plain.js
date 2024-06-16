@@ -16,12 +16,13 @@ const plain = (diff) => {
     const lines = [];
     for (let i = 0; i < currentValue.length; i += 1) {
       const node = currentValue[i];
-      const { key, type, value, newValue } = node;
+      const { key, type, value } = node;
       const property = [...ancestry, key].join('.');
 
       if (type === 'deleted' && i + 1 < currentValue.length && currentValue[i + 1].key === key && currentValue[i + 1].type === 'added') {
         lines.push(`Property '${property}' was updated. From ${formatValue(value)} to ${formatValue(currentValue[i + 1].value)}`);
       } else if (type === 'added' && i > 0 && currentValue[i - 1].key === key && currentValue[i - 1].type === 'deleted') {
+        i += 1;
       } else {
         switch (type) {
           case 'added':
@@ -41,7 +42,6 @@ const plain = (diff) => {
 
   return iter(diff, []).join('\n');
 };
-
 
 export { plain };
 
