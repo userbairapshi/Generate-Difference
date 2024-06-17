@@ -10,15 +10,9 @@ program
   .version('1.0.0', '-V, --version', 'output the version number')
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filePath1> <filePath2>')
-  .option('-f, --format [type]', 'output format', 'stylish')
+  .option('-f, --format [type]', 'output format', 'stylish', 'plain', 'json')
   .action((filePath1, filePath2, options) => {
-    const suppFormats = ['stylish', 'plain'];
-    if (!suppFormats.includes(options.format)) {
-      console.error(`Unsupported format: ${options.format}`);
-      process.exit(1);
-    }
     console.log(genDiff(filePath1, filePath2, options.format));
   });
-
 
 program.parse(process.argv);

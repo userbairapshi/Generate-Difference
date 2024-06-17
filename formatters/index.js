@@ -5,6 +5,8 @@ const chooseFormatter = (formatName) => {
   switch (formatName) {
     case 'plain':
       return plain;
+    case 'json':
+      return JSON.stringify;
     default:
       return stylish;
   }

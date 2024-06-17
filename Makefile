@@ -8,22 +8,25 @@ publish:
 	npm publish --dry-
 
 gendiff:
-	node bin/gendiff.js -h
+	node bin/gendiff -h
 
 json:
-	node bin/gendiff.js __fixtured__/filePath1.json __fixtured__/filePath2.json
+	node bin/gendiff __fixtured__/filePath1.json __fixtured__/filePath2.json
 
 yaml:
-	node bin/gendiff.js __fixtured__/filePath1.yaml __fixtured__/filePath2.yaml
+	node bin/gendiff __fixtured__/filePath1.yaml __fixtured__/filePath2.yaml
 
 compare:
-	node bin/gendiff.js __fixtured__/filePath3.json __fixtured__/filePath4.json
+	node bin/gendiff __fixtured__/filePath3.json __fixtured__/filePath4.json
 
 nested:
-	node bin/gendiff.js __fixtured__/filePath3.yaml __fixtured__/filePath4.yaml
+	node bin/gendiff __fixtured__/filePath3.yaml __fixtured__/filePath4.yaml
 
 plain:
-	node bin/gendiff.js --format plain __fixtured__/filePath3.json __fixtured__/filePath4.json
+	node bin/gendiff --format plain __fixtured__/filePath3.json __fixtured__/filePath4.json
+
+format:
+	node bin/gendiff --format json __fixtured__/filePath3.json __fixtured__/filePath4.json
 
 lint:
 	npx eslint .

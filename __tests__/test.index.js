@@ -42,4 +42,10 @@ describe ('formatters', () => {
   test('should return flat format plain', () => {
     expect(genDiff(filePath3, filePath4, 'plain')).toEqual(expectedFlatContent);
   });
+
+  test('should return flat format json', () => {
+    const expectedPath = '__fixtured__/file4.txt';
+    const jsonResult = fs.readFileSync(expectedPath, 'utf8');
+    expect(genDiff(filePath3, filePath4, 'json')).toEqual(jsonResult);
+  });
 });

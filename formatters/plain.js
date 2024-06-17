@@ -13,33 +13,27 @@ const formatValue = (value) => {
 
 const plain = (diff) => {
   const iter = (currentValue, ancestry) => {
-    const lines = [];
-    for (let i = 0; i < currentValue.length; i += 1) {
-      const node = currentValue[i];
+    return currentValue.reduce((acc, node, index, array) => {
       const { key, type, value } = node;
       const property = [...ancestry, key].join('.');
 
-      if (type === 'deleted' && i + 1 < currentValue.length && currentValue[i + 1].key === key && currentValue[i + 1].type === 'added') {
-        lines.push(`Property '${property}' was updated. From ${formatValue(value)} to ${formatValue(currentValue[i + 1].value)}`);
-        i += 1; // Пропускаем следующий узел, так как он уже обработан
-      } else if (type === 'added' && i > 0 && currentValue[i - 1].key === key && currentValue[i - 1].type === 'deleted') {
-        // Этот узел уже обработан, пропускаем его
-        continue;
+      if (type === 'deleted' && index + 1 < array.length && array[index + 1].key === key && array[index + 1].type === 'added') {
+        return acc.concat(`Property '${property}' was updated. From ${formatValue(value)} to ${formatValue(array[index + 1].value)}`);
+      } else if (type === 'added' && index > 0 && array[index - 1].key === key && array[index - 1].type === 'deleted') {
+        return acc;
       } else {
         switch (type) {
           case 'added':
-            lines.push(`Property '${property}' was added with value: ${formatValue(value)}`);
-            break;
+            return acc.concat(`Property '${property}' was added with value: ${formatValue(value)}`);
           case 'deleted':
-            lines.push(`Property '${property}' was removed`);
-            break;
+            return acc.concat(`Property '${property}' was removed`);
           case 'nested':
-            lines.push(...iter(node.children, [...ancestry, key]));
-            break;
+            return acc.concat(iter(node.children, [...ancestry, key]));
+          default:
+            return acc;
         }
       }
-    }
-    return lines;
+    }, []);
   };
 
   return iter(diff, []).join('\n');
