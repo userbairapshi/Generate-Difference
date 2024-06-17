@@ -16,9 +16,10 @@ const stylish = (diff, depth = 1) => {
   const bracketIndent = ' '.repeat((depth - 1) * indentSize);
 
   const formattedDiff = diff.map((node) => {
-    const { key, type, value, children } = node;
+    const {
+      key, type, value, children,
+    } = node;
     const formattedValue = type === 'nested' ? stylish(children, depth + 1) : formatValue(value, depth);
-
     switch (type) {
       case 'deleted':
         return `${currentIndent}- ${key}: ${formattedValue}`;
@@ -28,10 +29,12 @@ const stylish = (diff, depth = 1) => {
         return `${currentIndent}  ${key}: ${formattedValue}`;
       case 'unchanged':
         return `${currentIndent}  ${key}: ${formattedValue}`;
+      default:
+        return `${currentIndent}  ${key}: ${formattedValue}`;
     }
   });
 
   return ['{', ...formattedDiff, `${bracketIndent}}`].join('\n');
 };
 
-export { stylish };
+export default stylish;

@@ -1,6 +1,6 @@
-import { parse } from '../parse/parser.js';
-import { findDifferences } from './formatDiff.js';
-import { chooseFormatter } from '../formatters/index.js';
+import parse from '../parse/parser.js';
+import findDifferences from './formatDiff.js';
+import chooseFormatter from '../formatters/index.js';
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = parse(filepath1);

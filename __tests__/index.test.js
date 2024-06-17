@@ -1,7 +1,10 @@
-import genDiff from '../src/index.js';
-import { filePath1, filePath2, fileYaml1, fileYaml2, filePath3, filePath4, fileYaml3, fileYaml4 } from '../parse/path.js';
 import fs from 'fs';
 import yaml from 'yaml';
+import genDiff from '../src/index.js';
+import {
+  filePath1, filePath2, fileYaml1, fileYaml2, filePath3, filePath4, fileYaml3, fileYaml4,
+}
+  from '../parse/path.js';
 
 let expectedDiffContent;
 let expectedDiffContent2;

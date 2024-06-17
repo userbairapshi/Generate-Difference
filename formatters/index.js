@@ -1,5 +1,5 @@
-import { stylish } from "./stylish.js";
-import { plain } from "./plain.js";
+import stylish from './stylish.js';
+import plain from './plain.js';
 
 const chooseFormatter = (formatName) => {
   switch (formatName) {
@@ -11,5 +11,5 @@ const chooseFormatter = (formatName) => {
       return stylish;
   }
 };
-  
-export { chooseFormatter };
+
+export default chooseFormatter;
