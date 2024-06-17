@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
 const findDifferences = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+  const keys = _.union(Object.keys(obj1), Object.keys(obj2));
+  const sortedKeys = [...keys].sort();
 
-  return keys.flatMap((key) => {
+  return sortedKeys.flatMap((key) => {
     if (!_.has(obj2, key)) {
       return { key, type: 'deleted', value: obj1[key] };
     }
