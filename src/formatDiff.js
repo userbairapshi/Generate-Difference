@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
 const findDifferences = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2));
+  const oldObj1 = _.cloneDeep(obj1);
+  const oldObj2 = _.cloneDeep(obj2);
+  const keys = _.union(Object.keys(oldObj1), Object.keys(oldObj2));
   const sortedKeys = [...keys].sort();
 
   return sortedKeys.flatMap((key) => {
