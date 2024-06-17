@@ -4,7 +4,7 @@ const findDifferences = (obj1, obj2) => {
   const oldObj1 = _.cloneDeep(obj1);
   const oldObj2 = _.cloneDeep(obj2);
   const keys = _.union(Object.keys(oldObj1), Object.keys(oldObj2));
-  const sortedKeys = [...keys].slice().sort();
+  const sortedKeys = _.orderBy(keys);
 
   return sortedKeys.flatMap((key) => {
     if (!_.has(obj2, key)) {
