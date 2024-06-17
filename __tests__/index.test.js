@@ -1,4 +1,4 @@
-import genDiff from '../src/genDiff.js';
+import genDiff from '../src/index.js';
 import { filePath1, filePath2, fileYaml1, fileYaml2, filePath3, filePath4, fileYaml3, fileYaml4 } from '../parse/path.js';
 import fs from 'fs';
 import yaml from 'yaml';
@@ -12,7 +12,7 @@ beforeEach(() => {
   expectedDiffContent = fs.readFileSync('__fixtured__/file1.txt', 'utf-8').replace(/\r?\n|\r/g, '');
   expectedDiffContent2 = fs.readFileSync('__fixtured__/file2.txt', 'utf-8');
   expectedFlatContent = fs.readFileSync('__fixtured__/file3.txt', 'utf-8');
-  jsonResult = fs.readFileSync('__fixtured__/file4.txt', 'utf8');
+  jsonResult = fs.readFileSync('__fixtured__/file4.txt', 'utf-8');
 });
 
 describe('gendiff', () => {
