@@ -12,10 +12,10 @@
 
 ##Работа с документацией.
 
-[commander](https://www.npmjs.com/package/commander)
-[lodash](https://lodash.com)
-[jest](https://jestjs.io/ru/)
-[js-yaml](https://www.npmjs.com/package/js-yaml)
+- [commander](https://www.npmjs.com/package/commander)
+- [lodash](https://lodash.com)
+- [jest](https://jestjs.io/ru/)
+- [js-yaml](https://www.npmjs.com/package/js-yaml)
 
 
 ##Визуализация процесса: 
