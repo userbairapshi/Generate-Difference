@@ -1,3 +1,3 @@
-import { genDiff } from "./diff.js";
+import { genDiff } from "./index.js";
 
 export default genDiff;
