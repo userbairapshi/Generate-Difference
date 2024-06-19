@@ -1,9 +1,7 @@
 import _ from 'lodash';
 
 const findDifferences = (obj1, obj2) => {
-  const oldObj1 = _.cloneDeep(obj1);
-  const oldObj2 = _.cloneDeep(obj2);
-  const keys = _.union(Object.keys(oldObj1), Object.keys(oldObj2));
+  const keys = _.union(Object.keys(obj1), Object.keys(obj2));
   const sortedKeys = _.orderBy(keys);
 
   return sortedKeys.flatMap((key) => {
@@ -13,8 +11,7 @@ const findDifferences = (obj1, obj2) => {
     if (!_.has(obj1, key)) {
       return { key, type: 'added', value: obj2[key] };
     }
-    if (_.isObject(obj1[key]) && _.isObject(obj2[key])
-      && !Array.isArray(obj1[key]) && !Array.isArray(obj2[key])) {
+    if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
       return { key, type: 'nested', children: findDifferences(obj1[key], obj2[key]) };
     }
     if (!_.isEqual(obj1[key], obj2[key])) {
@@ -24,7 +21,7 @@ const findDifferences = (obj1, obj2) => {
       ];
     }
     return { key, type: 'unchanged', value: obj1[key] };
-  }).filter((diff) => diff.length !== 0 || diff.type !== 'unchanged');
+  });
 };
 
 export default findDifferences;
