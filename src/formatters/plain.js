@@ -24,7 +24,7 @@ const plain = (diff) => {
         case 'deleted':
           return `Property '${property}' was removed`;
         case 'changed':
-          return `Property '${property}' was changed. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
+          return `Property '${property}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
         case 'nested':
           return iter(children, [...ancestry, key]);
         default:

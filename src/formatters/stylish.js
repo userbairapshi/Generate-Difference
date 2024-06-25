@@ -35,8 +35,6 @@ const stylish = (diff, depth = 1, indentSize = 4) => {
         return `${currentIndent}  ${key}: ${stylish(children, depth + 1, indentSize)}`;
       case 'unchanged':
         return `${currentIndent}  ${key}: ${formatValue(value, depth, indentSize)}`;
-      default:
-        throw new Error(`Unknown type ${type}`);
     }
   });
 
