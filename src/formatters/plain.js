@@ -1,8 +1,7 @@
+import _ from 'lodash';
+
 const formatValue = (value) => {
-  if (value === null) {
-    return 'null';
-  }
-  if (typeof value === 'object' && !Array.isArray(value)) {
+  if (_.isPlainObject(value)) {
     return '[complex value]';
   }
   if (typeof value === 'string') {
@@ -13,32 +12,21 @@ const formatValue = (value) => {
 
 const plain = (diff) => {
   const iter = (currentValue, ancestry) => {
-    const newCurrentValue = currentValue.flatMap((node, index, array) => {
+    const newCurrentValue = currentValue.flatMap((node) => {
       const {
         key, type, value, oldValue, newValue, children,
       } = node;
       const property = [...ancestry, key].join('.');
-
-      const isUpdated = (type === 'deleted' && index + 1 < array.length && array[index + 1].key === key && array[index + 1].type === 'added');
-      const isRedundantAdd = (type === 'added' && index > 0 && array[index - 1].key === key && array[index - 1].type === 'deleted');
-
-      if (isUpdated) {
-        return `Property '${property}' was updated. From ${formatValue(value)} to ${formatValue(array[index + 1].value)}`;
-      }
-
-      if (isRedundantAdd) {
-        return [];
-      }
 
       switch (type) {
         case 'added':
           return `Property '${property}' was added with value: ${formatValue(value)}`;
         case 'deleted':
           return `Property '${property}' was removed`;
+        case 'changed':
+          return `Property '${property}' was changed. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
         case 'nested':
           return iter(children, [...ancestry, key]);
-        case 'changed':
-          return `Property '${property}' was changed from ${formatValue(oldValue)} to ${formatValue(newValue)}`;
         default:
           return [];
       }

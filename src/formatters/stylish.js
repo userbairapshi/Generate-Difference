@@ -3,7 +3,7 @@ import _ from 'lodash';
 const createIndent = (depth, indentSize) => ' '.repeat(depth * indentSize);
 
 const formatValue = (value, depth, indentSize) => {
-  if (_.isObject(value) && !Array.isArray(value)) {
+  if (_.isPlainObject(value)) {
     const nestedIndent = createIndent(depth + 1, indentSize);
     const bracketIndent = createIndent(depth, indentSize);
     const entries = Object.entries(value)
@@ -14,29 +14,34 @@ const formatValue = (value, depth, indentSize) => {
 };
 
 const stylish = (diff, depth = 1, indentSize = 4) => {
-  const currentIndent = ' '.repeat(depth * indentSize - 2);
-  const bracketIndent = createIndent(depth - 1, indentSize);
-
-  const formattedDiff = diff.map((node) => {
+  const lines = diff.flatMap((node) => {
     const {
-      key, type, value, children,
+      key, type, value, oldValue, newValue, children,
     } = node;
-    const formattedValue = type === 'nested' ? stylish(children, depth + 1, indentSize) : formatValue(value, depth, indentSize);
+
+    const currentIndent = createIndent(depth, indentSize).slice(2);
+
     switch (type) {
-      case 'deleted':
-        return `${currentIndent}- ${key}: ${formattedValue}`;
       case 'added':
-        return `${currentIndent}+ ${key}: ${formattedValue}`;
+        return `${currentIndent}+ ${key}: ${formatValue(value, depth, indentSize)}`;
+      case 'deleted':
+        return `${currentIndent}- ${key}: ${formatValue(value, depth, indentSize)}`;
+      case 'changed':
+        return [
+          `${currentIndent}- ${key}: ${formatValue(oldValue, depth, indentSize)}`,
+          `${currentIndent}+ ${key}: ${formatValue(newValue, depth, indentSize)}`,
+        ];
       case 'nested':
-        return `${currentIndent}  ${key}: ${formattedValue}`;
+        return `${currentIndent}  ${key}: ${stylish(children, depth + 1, indentSize)}`;
       case 'unchanged':
-        return `${currentIndent}  ${key}: ${formattedValue}`;
+        return `${currentIndent}  ${key}: ${formatValue(value, depth, indentSize)}`;
       default:
-        throw new Error('Unknown node status!');
+        throw new Error(`Unknown type ${type}`);
     }
   });
 
-  return ['{', ...formattedDiff, `${bracketIndent}}`].join('\n');
+  const closingBracketIndent = createIndent(depth - 1, indentSize);
+  return `{\n${lines.join('\n')}\n${closingBracketIndent}}`;
 };
 
 export default stylish;

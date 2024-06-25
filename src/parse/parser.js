@@ -1,14 +1,13 @@
 import yaml from 'yaml';
 
-const parse = (data) => {
-  try {
-    return JSON.parse(data);
-  } catch (jsonError) {
-    try {
+const parse = (data, type) => {
+  switch (type) {
+    case 'json':
+      return JSON.parse(data);
+    case 'yaml':
       return yaml.parse(data);
-    } catch (yamlError) {
-      throw new Error('Data is neither JSON nor YAML format.');
-    }
+    default:
+      throw new Error('JSON and YAML formats not found');
   }
 };
 
