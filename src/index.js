@@ -1,12 +1,10 @@
 import fs from 'fs';
+import path from 'path';
 import parse from './parse/parser.js';
 import findDifferences from './formatDiff.js';
 import chooseFormatter from './formatters/index.js';
 
-const getFileExtension = (filename) => {
-  const parts = filename.split('.');
-  return parts[parts.length - 1];
-};
+const getFileExtension = (filename) => path.extname(filename).slice(1);
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const content1 = fs.readFileSync(filepath1, 'utf-8');

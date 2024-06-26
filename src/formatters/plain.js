@@ -25,10 +25,12 @@ const plain = (diff) => {
           return `Property '${property}' was removed`;
         case 'changed':
           return `Property '${property}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
+        case 'unchanged':
+          return [];
         case 'nested':
           return iter(children, [...ancestry, key]);
         default:
-          return [];
+          throw new Error(`Unexpected node value:  ${type}`);
       }
     });
     return newCurrentValue;
